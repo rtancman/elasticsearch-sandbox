@@ -74,3 +74,49 @@ GET /example2/_search
   }
 }
 ```
+
+
+### Removendo stop words na lingua portuguesa
+```
+PUT /example3
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "filter": {
+          "synonym": {
+            "type": "synonym",
+            "lenient": true,
+            "synonyms": [
+              "i-pod, i pod => ipod",
+              "universe, cosmos"
+            ]
+          },
+          "stop_words_brazilian": {
+            "type": "stop",
+            "stopwords": "_brazilian_" 
+          }
+        },
+        "analyzer": {
+          "default": {
+            "filter": [
+              "asciifolding",
+              "lowercase",
+              "stop_words_brazilian",
+              "synonym"
+            ],
+            "tokenizer": "standard"
+          }
+        }
+      }
+    }
+  }
+}
+
+
+POST /example3/_analyze
+{
+  "analyzer": "default",
+  "text": "Este é um exemplo de texto que eu gostaria de indexar."
+}
+```
