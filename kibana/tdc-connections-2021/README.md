@@ -513,25 +513,23 @@ GET /busca-artigos-livros/_search
 {
   "query": {
     "bool": {
-      "must": [
-        {
-          "query_string": {
-            "query": "Algoritmos -Recuperação",
-            "fields": [
-              "todos"
-            ]
-          }
-        },
-        {
-          "range": {
+      "filter": {
+        "range": {
           "avaliacao": {
-            "gte": 6,
+            "gte": 8,
             "lte": 10
           }
         }
-      ]
+      },
+      "must": {
+        "query_string": {
+          "query": "Algoritmos -Recuperação",
+          "fields": [
+            "todos"
+          ]
+        }
+      }
     }
   }
 }
-
 ```
