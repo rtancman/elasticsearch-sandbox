@@ -532,4 +532,19 @@ GET /busca-artigos-livros/_search
     }
   }
 }
+
+GET /busca-geral/_search
+{
+  "query": {
+    "query_string": {
+        "query":"recuperação",
+        "fields": ["todos"]
+    }
+  },
+  "highlight": {
+    "fields" : {
+      "todos" : { "pre_tags" : ["<strong>"], "post_tags" : ["</strong>"] }
+    }
+  }
+}
 ```
