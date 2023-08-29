@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  ELASTICSEARCH_HOSTS:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.9.1
+    container_name: elastic-bnu
+    environment:
+      - node.name=elastic-bnu
+      - cluster.name=elastic-bnu-docker-cluster
+      - discovery.seed_hosts=elastic-bnu
+      - cluster.initial_master_nodes=elastic-bnu
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      #- "ES_JAVA_OPTS=-Xms3056m -Xmx3056m"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic-bnu
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.9.1
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: http://elastic-bnu:9200
+      ELASTICSEARCH_HOSTS: http://elastic-bnu:9200
+    networks:
+      - elastic-bnu
+
+volumes:
+  es_data:
+    driver: local
+
+networks:
+  elastic-bnu:
+    driver: bridge
