@@ -4,6 +4,8 @@
 - Este material utiliza o Docker para rodar os comandos
 
 ## ML
+- https://github.com/Hironsan/bertsearch
+- https://www.elastic.co/guide/en/elasticsearch/reference/current/infer-trained-model.html#infer-trained-model-example
 
 ### [Eland](https://www.elastic.co/guide/en/elasticsearch/client/eland/current/machine-learning.html)
 
@@ -22,6 +24,9 @@ docker run -it --rm --network host elastic/eland \
       --start
 ```
 ### [NER](https://www.elastic.co/blog/how-to-deploy-nlp-named-entity-recognition-ner-example)
+
+- https://towardsdatascience.com/elasticsearch-meets-bert-building-search-engine-with-elasticsearch-and-bert-9e74bf5b4cf2
+
 ```bash
 docker run -it --rm --network host elastic/eland \
     eland_import_hub_model \
