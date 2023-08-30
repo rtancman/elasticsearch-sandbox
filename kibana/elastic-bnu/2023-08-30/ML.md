@@ -6,8 +6,10 @@
 ## ML
 - https://github.com/Hironsan/bertsearch
 - https://www.elastic.co/guide/en/elasticsearch/reference/current/infer-trained-model.html#infer-trained-model-example
+- https://www.elastic.co/blog/may-2023-launch-machine-learning-models
 
 ### [Eland](https://www.elastic.co/guide/en/elasticsearch/client/eland/current/machine-learning.html)
+- https://github.com/elastic/eland
 
 ```bash
 git clone https://github.com/elastic/eland
@@ -62,6 +64,7 @@ POST _ml/trained_models/dslim__bert-base-ner/deployment/_infer
 ```
 
 ### [Embeddings](https://www.elastic.co/blog/how-to-deploy-nlp-text-embeddings-and-vector-search)
+- https://www.elastic.co/what-is/vector-search
 
 ```bash
 docker run -it --rm --network host elastic/eland \
