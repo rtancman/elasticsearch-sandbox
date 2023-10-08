@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  ELASTICSEARCH_HOSTS:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+    container_name: elastic-seminco
+    environment:
+      - node.name=elastic-seminco
+      - cluster.name=elastic-seminco-docker-cluster
+      - discovery.seed_hosts=elastic-seminco
+      - cluster.initial_master_nodes=elastic-seminco
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      #- "ES_JAVA_OPTS=-Xms3056m -Xmx3056m"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic-seminco
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.10.2
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: http://elastic-seminco:9200
+      ELASTICSEARCH_HOSTS: http://elastic-seminco:9200
+    networks:
+      - elastic-seminco
+
+volumes:
+  es_data:
+    driver: local
+
+networks:
+  elastic-seminco:
+    driver: bridge
