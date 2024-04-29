@@ -25,7 +25,7 @@ GET /_analyze
       "stopwords": "_brazilian_"
     }
   ],
-  "text": "Criando um buscador utilizando o Elasticsearch na XVIII SEMINCO"
+  "text": "Criando um buscador utilizando o Elasticsearch"
 }
 
 ```
